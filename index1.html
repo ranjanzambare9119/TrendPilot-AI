@@ -1,0 +1,2704 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TrendPilot AI | Intelligent Social Media Companion</title>
+
+<meta name="description" content="TrendPilot AI - Intelligent Social Media Agent powered by IBM Watsonx Orchestrate">
+
+<!-- Google Fonts -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* ==============================
+        CSS RESET
+================================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+
+font-family:'Poppins',sans-serif;
+
+background:#050816;
+
+color:white;
+
+overflow-x:hidden;
+
+}
+
+
+/* ==============================
+        COLORS
+================================= */
+
+:root{
+
+--primary:#0F62FE;
+
+--secondary:#6D5EF9;
+
+--cyan:#31D6FF;
+
+--dark:#050816;
+
+--dark2:#0B1120;
+
+--glass:rgba(255,255,255,.06);
+
+--glassBorder:rgba(255,255,255,.08);
+
+--text:#ffffff;
+
+--sub:#B6C2D9;
+
+}
+
+
+/* ==============================
+        SCROLLBAR
+================================= */
+
+::-webkit-scrollbar{
+width:10px;
+}
+
+::-webkit-scrollbar-track{
+background:#07101f;
+}
+
+::-webkit-scrollbar-thumb{
+
+background:linear-gradient(
+180deg,
+var(--primary),
+var(--secondary)
+);
+
+border-radius:30px;
+
+}
+
+
+/* ==============================
+        BACKGROUND
+================================= */
+
+body::before{
+
+content:"";
+
+position:fixed;
+
+width:700px;
+
+height:700px;
+
+left:-250px;
+
+top:-250px;
+
+background:#0F62FE;
+
+opacity:.22;
+
+filter:blur(160px);
+
+border-radius:50%;
+
+animation:float1 15s infinite alternate ease-in-out;
+
+z-index:-5;
+
+}
+
+body::after{
+
+content:"";
+
+position:fixed;
+
+width:700px;
+
+height:700px;
+
+right:-250px;
+
+bottom:-250px;
+
+background:#6D5EF9;
+
+opacity:.20;
+
+filter:blur(180px);
+
+border-radius:50%;
+
+animation:float2 18s infinite alternate ease-in-out;
+
+z-index:-5;
+
+}
+
+
+@keyframes float1{
+
+0%{
+transform:translate(0,0);
+}
+
+100%{
+transform:translate(120px,100px);
+}
+
+}
+
+@keyframes float2{
+
+0%{
+transform:translate(0,0);
+}
+
+100%{
+transform:translate(-120px,-120px);
+}
+
+}
+
+
+/* ==============================
+        SECTIONS
+================================= */
+
+section{
+
+padding:110px 9%;
+
+position:relative;
+
+}
+
+
+/* ==============================
+        TYPOGRAPHY
+================================= */
+
+h1,h2,h3{
+
+font-family:'Space Grotesk',sans-serif;
+
+}
+
+h2{
+
+font-size:48px;
+
+margin-bottom:20px;
+
+}
+
+p{
+
+color:var(--sub);
+
+line-height:1.8;
+
+}
+
+
+/* ==============================
+        BUTTONS
+================================= */
+
+.btn{
+
+display:inline-flex;
+
+align-items:center;
+
+justify-content:center;
+
+padding:16px 32px;
+
+border-radius:50px;
+
+background:linear-gradient(
+135deg,
+var(--primary),
+var(--secondary)
+);
+
+color:white;
+
+text-decoration:none;
+
+font-weight:600;
+
+transition:.4s;
+
+box-shadow:
+
+0 10px 30px rgba(15,98,254,.25);
+
+}
+
+.btn:hover{
+
+transform:translateY(-5px);
+
+box-shadow:
+
+0 18px 40px rgba(15,98,254,.40);
+
+}
+
+.btn-outline{
+
+background:transparent;
+
+border:1px solid rgba(255,255,255,.12);
+
+box-shadow:none;
+
+}
+
+
+/* ==============================
+        GLASS
+================================= */
+
+.glass{
+
+background:var(--glass);
+
+border:1px solid var(--glassBorder);
+
+backdrop-filter:blur(20px);
+
+-webkit-backdrop-filter:blur(20px);
+
+border-radius:24px;
+
+}
+
+
+/* ==============================
+        CONTAINER
+================================= */
+
+.container{
+
+max-width:1400px;
+
+margin:auto;
+
+}
+
+
+/* ==============================
+        GRADIENT TEXT
+================================= */
+
+.gradient{
+
+background:linear-gradient(
+90deg,
+#6AD5FF,
+#0F62FE,
+#8A5CF7
+);
+
+-webkit-background-clip:text;
+
+-webkit-text-fill-color:transparent;
+
+}
+
+
+/* ==============================
+        REVEAL ANIMATION
+================================= */
+
+.reveal{
+
+opacity:0;
+
+transform:translateY(60px);
+
+transition:1s;
+
+}
+
+.reveal.active{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+
+/* ==============================
+        RESPONSIVE
+================================= */
+
+@media(max-width:992px){
+
+section{
+
+padding:90px 8%;
+
+}
+
+h2{
+
+font-size:36px;
+
+}
+
+}
+/* ==============================
+        NAVBAR
+================================= */
+
+header{
+
+position:fixed;
+
+top:18px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+width:92%;
+
+max-width:1380px;
+
+padding:16px 30px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+z-index:9999;
+
+background:rgba(8,12,25,.45);
+
+backdrop-filter:blur(22px);
+
+-webkit-backdrop-filter:blur(22px);
+
+border:1px solid rgba(255,255,255,.08);
+
+border-radius:18px;
+
+transition:.4s;
+
+}
+
+header.scrolled{
+
+top:8px;
+
+background:rgba(6,10,20,.82);
+
+box-shadow:0 20px 45px rgba(0,0,0,.35);
+
+}
+
+.logo{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+font-size:28px;
+
+font-weight:700;
+
+font-family:'Space Grotesk',sans-serif;
+
+cursor:pointer;
+
+}
+
+.logo-icon{
+
+width:46px;
+
+height:46px;
+
+border-radius:14px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+background:linear-gradient(135deg,var(--primary),var(--secondary));
+
+font-size:22px;
+
+box-shadow:0 12px 30px rgba(15,98,254,.35);
+
+}
+
+.logo span{
+
+background:linear-gradient(90deg,#66D6FF,#0F62FE,#8B5CF6);
+
+-webkit-background-clip:text;
+
+-webkit-text-fill-color:transparent;
+
+}
+
+nav{
+
+display:flex;
+
+gap:34px;
+
+}
+
+nav a{
+
+position:relative;
+
+text-decoration:none;
+
+color:white;
+
+font-weight:500;
+
+transition:.3s;
+
+}
+
+nav a:hover{
+
+color:#6DD5FF;
+
+}
+
+nav a::after{
+
+content:"";
+
+position:absolute;
+
+left:0;
+
+bottom:-8px;
+
+width:0;
+
+height:2px;
+
+background:linear-gradient(90deg,var(--cyan),var(--primary));
+
+transition:.35s;
+
+}
+
+nav a:hover::after{
+
+width:100%;
+
+}
+
+.nav-right{
+
+display:flex;
+
+align-items:center;
+
+gap:16px;
+
+}
+
+.launch-btn{
+
+padding:14px 28px;
+
+border-radius:40px;
+
+background:linear-gradient(135deg,var(--primary),var(--secondary));
+
+text-decoration:none;
+
+color:white;
+
+font-weight:600;
+
+box-shadow:0 12px 30px rgba(15,98,254,.3);
+
+transition:.35s;
+
+}
+
+.launch-btn:hover{
+
+transform:translateY(-4px);
+
+box-shadow:0 20px 40px rgba(15,98,254,.45);
+
+}
+
+.mobile-btn{
+
+display:none;
+
+font-size:28px;
+
+cursor:pointer;
+
+}
+/* ==================================================
+                    HERO SECTION
+================================================== */
+
+.hero{
+
+min-height:100vh;
+
+display:grid;
+
+grid-template-columns:1.1fr .9fr;
+
+align-items:center;
+
+gap:70px;
+
+padding-top:170px;
+
+}
+
+.hero-left{
+
+z-index:2;
+
+}
+
+.hero-badge{
+
+display:inline-flex;
+
+align-items:center;
+
+gap:10px;
+
+padding:12px 22px;
+
+border-radius:50px;
+
+background:rgba(255,255,255,.05);
+
+border:1px solid rgba(255,255,255,.08);
+
+color:#8EC5FF;
+
+font-size:15px;
+
+margin-bottom:30px;
+
+backdrop-filter:blur(18px);
+
+}
+
+.hero h1{
+
+font-size:72px;
+
+line-height:1.08;
+
+font-weight:700;
+
+margin-bottom:28px;
+
+}
+
+.hero p{
+
+font-size:19px;
+
+max-width:640px;
+
+margin-bottom:40px;
+
+}
+
+.hero-buttons{
+
+display:flex;
+
+gap:18px;
+
+flex-wrap:wrap;
+
+margin-top:20px;
+
+}
+
+.secondary-btn{
+
+padding:16px 32px;
+
+border-radius:50px;
+
+border:1px solid rgba(255,255,255,.10);
+
+text-decoration:none;
+
+color:white;
+
+transition:.35s;
+
+}
+
+.secondary-btn:hover{
+
+background:rgba(255,255,255,.05);
+
+}
+
+.hero-right{
+
+display:flex;
+
+justify-content:center;
+
+}
+
+.dashboard{
+
+width:100%;
+
+max-width:520px;
+
+padding:28px;
+
+background:rgba(255,255,255,.05);
+
+border:1px solid rgba(255,255,255,.08);
+
+border-radius:28px;
+
+backdrop-filter:blur(22px);
+
+box-shadow:0 25px 60px rgba(0,0,0,.35);
+
+animation:floatDashboard 5s ease-in-out infinite;
+
+}
+
+.dashboard-header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:25px;
+
+}
+
+.dashboard-title{
+
+font-size:22px;
+
+font-weight:600;
+
+}
+
+.status{
+
+padding:8px 16px;
+
+border-radius:30px;
+
+background:#0F62FE;
+
+font-size:13px;
+
+}
+
+.metric-card{
+
+padding:18px;
+
+background:rgba(255,255,255,.04);
+
+border-radius:18px;
+
+margin-bottom:18px;
+
+border:1px solid rgba(255,255,255,.06);
+
+}
+
+.metric-top{
+
+display:flex;
+
+justify-content:space-between;
+
+margin-bottom:10px;
+
+}
+
+.metric-value{
+
+font-size:32px;
+
+font-weight:700;
+
+}
+
+.progress{
+
+height:8px;
+
+background:rgba(255,255,255,.08);
+
+border-radius:20px;
+
+overflow:hidden;
+
+margin-top:12px;
+
+}
+
+.progress span{
+
+display:block;
+
+height:100%;
+
+border-radius:20px;
+
+background:linear-gradient(90deg,#0F62FE,#6D5EF9);
+
+}
+
+.small-grid{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:18px;
+
+margin-top:20px;
+
+}
+
+.small-card{
+
+padding:20px;
+
+background:rgba(255,255,255,.04);
+
+border-radius:18px;
+
+border:1px solid rgba(255,255,255,.06);
+
+}
+
+.small-card h4{
+
+margin-bottom:10px;
+
+font-size:15px;
+
+color:#B6C2D9;
+
+}
+
+.small-card h2{
+
+font-size:28px;
+
+margin:0;
+
+}
+
+@keyframes floatDashboard{
+
+0%{
+
+transform:translateY(0px);
+
+}
+
+50%{
+
+transform:translateY(-12px);
+
+}
+
+100%{
+
+transform:translateY(0px);
+
+}
+
+}
+
+@media(max-width:1050px){
+
+.hero{
+
+grid-template-columns:1fr;
+
+text-align:center;
+
+}
+
+.hero p{
+
+margin:auto auto 35px;
+
+}
+
+.hero-buttons{
+
+justify-content:center;
+
+}
+
+.hero h1{
+
+font-size:52px;
+
+}
+
+}
+/* ==================================================
+                AI SHOWCASE
+================================================== */
+
+.showcase{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:45px;
+
+align-items:center;
+
+}
+
+.showcase-left h2{
+
+font-size:48px;
+
+margin-bottom:20px;
+
+}
+
+.showcase-left p{
+
+font-size:18px;
+
+margin-bottom:35px;
+
+max-width:600px;
+
+}
+
+.ai-list{
+
+display:grid;
+
+gap:18px;
+
+}
+
+.ai-item{
+
+display:flex;
+
+gap:18px;
+
+align-items:flex-start;
+
+padding:22px;
+
+background:rgba(255,255,255,.05);
+
+border:1px solid rgba(255,255,255,.08);
+
+border-radius:18px;
+
+transition:.35s;
+
+}
+
+.ai-item:hover{
+
+transform:translateX(12px);
+
+border-color:#0F62FE;
+
+background:rgba(255,255,255,.07);
+
+}
+
+.ai-icon{
+
+width:60px;
+
+height:60px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:26px;
+
+border-radius:16px;
+
+background:linear-gradient(135deg,#0F62FE,#6D5EF9);
+
+}
+
+.ai-item h3{
+
+margin-bottom:8px;
+
+font-size:20px;
+
+}
+
+.live-panel{
+
+padding:30px;
+
+border-radius:26px;
+
+background:rgba(255,255,255,.05);
+
+border:1px solid rgba(255,255,255,.08);
+
+backdrop-filter:blur(20px);
+
+}
+
+.live-title{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:28px;
+
+}
+
+.live-dot{
+
+width:12px;
+
+height:12px;
+
+border-radius:50%;
+
+background:#2EFF81;
+
+animation:pulse 1.3s infinite;
+
+}
+
+@keyframes pulse{
+
+0%{
+
+transform:scale(1);
+
+opacity:1;
+
+}
+
+100%{
+
+transform:scale(2);
+
+opacity:0;
+
+}
+
+}
+
+.chart{
+
+height:220px;
+
+display:flex;
+
+align-items:flex-end;
+
+gap:14px;
+
+margin-top:25px;
+
+}
+
+.bar{
+
+flex:1;
+
+border-radius:12px 12px 0 0;
+
+background:linear-gradient(180deg,#31D6FF,#0F62FE,#6D5EF9);
+
+animation:grow 1.4s ease;
+
+}
+
+@keyframes grow{
+
+from{
+
+height:0;
+
+}
+
+}
+
+.bar:nth-child(1){height:90px;}
+.bar:nth-child(2){height:140px;}
+.bar:nth-child(3){height:170px;}
+.bar:nth-child(4){height:120px;}
+.bar:nth-child(5){height:210px;}
+.bar:nth-child(6){height:180px;}
+.bar:nth-child(7){height:235px;}
+
+.live-metrics{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:18px;
+
+margin-top:25px;
+
+}
+
+.metric-box{
+
+padding:18px;
+
+background:rgba(255,255,255,.05);
+
+border-radius:16px;
+
+text-align:center;
+
+}
+
+.metric-box h3{
+
+font-size:30px;
+
+color:#31D6FF;
+
+margin-bottom:6px;
+
+}
+
+@media(max-width:1000px){
+
+.showcase{
+
+grid-template-columns:1fr;
+
+}
+
+}
+/* ==================================================
+                    FEATURES
+================================================== */
+
+.features{
+
+padding-top:60px;
+
+}
+
+.feature-title{
+
+text-align:center;
+
+max-width:700px;
+
+margin:0 auto 70px;
+
+}
+
+.feature-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+
+gap:30px;
+
+}
+
+.feature-card{
+
+background:rgba(255,255,255,.05);
+
+border:1px solid rgba(255,255,255,.08);
+
+border-radius:24px;
+
+padding:35px;
+
+transition:.4s;
+
+backdrop-filter:blur(18px);
+
+}
+
+.feature-card:hover{
+
+transform:translateY(-12px);
+
+border-color:#0F62FE;
+
+box-shadow:0 20px 45px rgba(15,98,254,.20);
+
+}
+
+.feature-icon{
+
+width:70px;
+
+height:70px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+border-radius:18px;
+
+background:linear-gradient(135deg,#0F62FE,#6D5EF9);
+
+margin-bottom:25px;
+
+}
+
+.feature-icon i{
+
+font-size:30px;
+
+color:white;
+
+}
+.feature-card h3{
+
+margin-bottom:15px;
+
+font-size:24px;
+
+}
+
+.feature-card p{
+
+font-size:16px;
+
+}
+/* ==================================================
+                    STATISTICS
+================================================== */
+
+.stats{
+
+padding:120px 9%;
+
+}
+
+.stats-grid{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:25px;
+
+}
+
+.stat-card{
+
+background:rgba(255,255,255,.05);
+
+border:1px solid rgba(255,255,255,.08);
+
+border-radius:24px;
+
+padding:40px;
+
+text-align:center;
+
+backdrop-filter:blur(18px);
+
+transition:.4s;
+
+}
+
+.stat-card:hover{
+
+transform:translateY(-10px);
+
+border-color:#0F62FE;
+
+box-shadow:0 20px 45px rgba(15,98,254,.25);
+
+}
+
+.stat-card h2{
+
+font-size:52px;
+
+margin-bottom:10px;
+
+color:#31D6FF;
+
+}
+
+.stat-card p{
+
+font-size:18px;
+
+}
+
+@media(max-width:1000px){
+
+.stats-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:650px){
+
+.stats-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+/* ==================================================
+                    AI WORKFLOW
+================================================== */
+
+.workflow{
+
+padding:120px 9%;
+
+}
+
+.workflow-title{
+
+text-align:center;
+
+max-width:700px;
+
+margin:0 auto 80px;
+
+}
+
+.timeline{
+
+max-width:900px;
+
+margin:auto;
+
+position:relative;
+
+}
+
+.timeline::before{
+
+content:"";
+
+position:absolute;
+
+left:50%;
+
+top:0;
+
+transform:translateX(-50%);
+
+width:4px;
+
+height:100%;
+
+background:linear-gradient(#0F62FE,#6D5EF9,#31D6FF);
+
+border-radius:10px;
+
+}
+
+.step{
+
+position:relative;
+
+width:50%;
+
+padding:20px 50px;
+
+margin-bottom:60px;
+
+}
+
+.step:nth-child(odd){
+
+left:0;
+
+text-align:right;
+
+}
+
+.step:nth-child(even){
+
+left:50%;
+
+}
+
+.step-content{
+
+background:rgba(255,255,255,.05);
+
+border:1px solid rgba(255,255,255,.08);
+
+padding:30px;
+
+border-radius:20px;
+
+backdrop-filter:blur(18px);
+
+transition:.4s;
+
+}
+
+.step-content:hover{
+
+transform:scale(1.04);
+
+border-color:#0F62FE;
+
+box-shadow:0 20px 45px rgba(15,98,254,.25);
+
+}
+
+.circle{
+
+position:absolute;
+
+top:35px;
+
+width:26px;
+
+height:26px;
+
+background:#31D6FF;
+
+border:5px solid #050816;
+
+border-radius:50%;
+
+box-shadow:0 0 20px #31D6FF;
+
+}
+
+.step:nth-child(odd) .circle{
+
+right:-13px;
+
+}
+
+.step:nth-child(even) .circle{
+
+left:-13px;
+
+}
+
+.step h3{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+margin-bottom:12px;
+
+font-size:24px;
+
+}
+
+.step h3 i{
+
+color:#31D6FF;
+
+font-size:22px;
+
+}
+
+@media(max-width:900px){
+
+.timeline::before{
+
+left:20px;
+
+}
+
+.step{
+
+width:100%;
+
+left:0 !important;
+
+padding-left:60px;
+
+padding-right:10px;
+
+text-align:left !important;
+
+}
+
+.circle{
+
+left:8px !important;
+
+}
+
+}
+/* ==================================================
+                    AI CHAT DEMO
+================================================== */
+
+.chat-section{
+
+padding:120px 9%;
+
+}
+
+.chat-wrapper{
+
+max-width:900px;
+
+margin:auto;
+
+background:rgba(255,255,255,.05);
+
+border:1px solid rgba(255,255,255,.08);
+
+border-radius:28px;
+
+overflow:hidden;
+
+backdrop-filter:blur(20px);
+
+box-shadow:0 25px 60px rgba(0,0,0,.35);
+
+}
+
+.chat-header{
+
+padding:22px 30px;
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+background:rgba(255,255,255,.04);
+
+border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+.chat-avatar{
+
+width:50px;
+
+height:50px;
+
+border-radius:50%;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+background:linear-gradient(135deg,#0F62FE,#6D5EF9);
+
+color:white;
+
+font-size:22px;
+
+}
+
+.chat-body{
+
+padding:35px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:20px;
+
+}
+
+.message{
+
+max-width:75%;
+
+padding:18px 22px;
+
+border-radius:18px;
+
+line-height:1.7;
+
+}
+
+.user-message{
+
+align-self:flex-end;
+
+background:#0F62FE;
+
+}
+
+.ai-message{
+
+align-self:flex-start;
+
+background:rgba(255,255,255,.07);
+
+border:1px solid rgba(255,255,255,.08);
+
+}
+
+.chat-button{
+
+display:inline-block;
+
+margin:30px;
+
+padding:16px 34px;
+
+background:linear-gradient(135deg,#0F62FE,#6D5EF9);
+
+border-radius:40px;
+
+text-decoration:none;
+
+color:white;
+
+font-weight:600;
+
+transition:.3s;
+
+}
+
+.chat-button:hover{
+
+transform:translateY(-4px);
+
+box-shadow:0 15px 35px rgba(15,98,254,.35);
+
+}
+/* ==================================================
+                    FOOTER
+================================================== */
+
+footer{
+
+margin-top:100px;
+
+padding:70px 9% 30px;
+
+background:rgba(255,255,255,.03);
+
+border-top:1px solid rgba(255,255,255,.08);
+
+}
+
+.footer-grid{
+
+display:grid;
+
+grid-template-columns:2fr 1fr 1fr;
+
+gap:60px;
+
+margin-bottom:50px;
+
+}
+
+.footer-logo{
+
+font-size:34px;
+
+font-weight:700;
+
+font-family:'Space Grotesk',sans-serif;
+
+margin-bottom:18px;
+
+}
+
+.footer-logo span{
+
+color:#31D6FF;
+
+}
+
+.footer-links{
+
+display:flex;
+
+flex-direction:column;
+
+gap:15px;
+
+}
+
+.footer-links a{
+
+text-decoration:none;
+
+color:#B6C2D9;
+
+transition:.3s;
+
+}
+
+.footer-links a:hover{
+
+color:white;
+
+padding-left:8px;
+
+}
+
+.social-icons{
+
+display:flex;
+
+gap:18px;
+
+margin-top:20px;
+
+}
+
+.social-icons a{
+
+width:48px;
+
+height:48px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+border-radius:50%;
+
+background:rgba(255,255,255,.05);
+
+color:white;
+
+text-decoration:none;
+
+transition:.35s;
+
+}
+
+.social-icons a:hover{
+
+background:#0F62FE;
+
+transform:translateY(-5px);
+
+}
+
+.footer-bottom{
+
+padding-top:30px;
+
+border-top:1px solid rgba(255,255,255,.08);
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+color:#B6C2D9;
+
+font-size:15px;
+
+flex-wrap:wrap;
+
+gap:15px;
+
+}
+
+@media(max-width:900px){
+
+.footer-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.footer-bottom{
+
+flex-direction:column;
+
+text-align:center;
+
+}
+
+}
+/* ==================================================
+                SCROLL PROGRESS BAR
+================================================== */
+
+#progressBar{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:0%;
+
+height:4px;
+
+background:linear-gradient(90deg,#31D6FF,#0F62FE,#6D5EF9);
+
+z-index:99999;
+
+box-shadow:0 0 20px rgba(49,214,255,.8);
+
+}
+/* ==================================================
+                MOUSE GLOW
+================================================== */
+
+#mouseGlow{
+
+position:fixed;
+
+width:350px;
+
+height:350px;
+
+border-radius:50%;
+
+background:radial-gradient(circle,
+rgba(49,214,255,.18) 0%,
+rgba(15,98,254,.12) 35%,
+transparent 70%);
+
+pointer-events:none;
+
+transform:translate(-50%,-50%);
+
+z-index:-1;
+
+transition:transform .08s linear;
+
+filter:blur(25px);
+
+}
+.chat-input-area{
+
+display:flex;
+
+padding:25px;
+
+gap:15px;
+
+border-top:1px solid rgba(255,255,255,.08);
+
+}
+
+.chat-input-area input{
+
+flex:1;
+
+padding:18px 22px;
+
+border:none;
+
+outline:none;
+
+border-radius:40px;
+
+background:rgba(255,255,255,.06);
+
+color:white;
+
+font-size:16px;
+
+}
+
+.chat-input-area input::placeholder{
+
+color:#B6C2D9;
+
+}
+
+.chat-input-area button{
+
+width:60px;
+
+border:none;
+
+border-radius:50%;
+
+background:linear-gradient(135deg,#0F62FE,#6D5EF9);
+
+color:white;
+
+cursor:pointer;
+
+font-size:20px;
+
+transition:.3s;
+
+}
+
+.chat-input-area button:hover{
+
+transform:scale(1.08);
+
+}
+
+</style>
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div id="progressBar"></div>
+
+<div id="mouseGlow"></div>
+
+<header id="navbar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            🚀
+        </div>
+
+        <div>
+            Trend<span>Pilot</span>
+        </div>
+
+    </div>
+
+    <nav>
+
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#analytics">Analytics</a>
+        <a href="#chat">AI Agent</a>
+        <a href="#about">About</a>
+
+    </nav>
+
+    <div class="nav-right">
+
+        <a href="#chat" class="launch-btn">
+            Launch AI
+        </a>
+
+        <div class="mobile-btn">
+            ☰
+        </div>
+
+    </div>
+
+</header>
+<section class="hero container" id="home">
+
+    <div class="hero-left reveal">
+
+        <div class="hero-badge">
+            Powered by IBM watsonx Orchestrate
+        </div>
+
+        <h1>
+            Transform Your
+            <span class="gradient">Social Media Strategy</span>
+            with AI
+        </h1>
+
+        <p>
+            TrendPilot is an intelligent AI-powered social media companion that helps
+            brands, businesses, and creators analyze trends, generate engaging
+            content, understand audience sentiment, track competitors, and optimize
+            campaigns using data-driven insights.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#chat" class="btn">
+                Launch AI Agent
+            </a>
+
+            <a href="#features" class="secondary-btn">
+                Explore Features
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="hero-right reveal">
+
+        <div class="dashboard">
+
+            <div class="dashboard-header">
+
+                <div class="dashboard-title">
+                    AI Analytics Dashboard
+                </div>
+
+                <div class="status">
+                    LIVE
+                </div>
+
+            </div>
+
+            <div class="metric-card">
+
+                <div class="metric-top">
+
+                    <span>Campaign Performance</span>
+
+                    <span>+18%</span>
+
+                </div>
+
+                <div class="metric-value">
+                    92%
+                </div>
+
+                <div class="progress">
+                    <span style="width:92%"></span>
+                </div>
+
+            </div>
+
+            <div class="small-grid">
+
+                <div class="small-card">
+                    <h4>Audience Sentiment</h4>
+                    <h2>89%</h2>
+                </div>
+
+                <div class="small-card">
+                    <h4>Trending Score</h4>
+                    <h2>96</h2>
+                </div>
+
+                <div class="small-card">
+                    <h4>Best Posting Time</h4>
+                    <h2>7 PM</h2>
+                </div>
+
+                <div class="small-card">
+                    <h4>Growth Forecast</h4>
+                    <h2>+24%</h2>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<section id="analytics">
+
+    <div class="container showcase reveal">
+
+        <div class="showcase-left">
+
+            <h2>
+                AI that understands your
+                <span class="gradient">Social Media</span>
+            </h2>
+
+            <p>
+                TrendPilot continuously helps you make smarter decisions by analyzing campaign performance,
+                audience engagement, trending content, competitor strategies, and social media growth opportunities.
+            </p>
+
+            <div class="ai-list">
+
+                <div class="ai-item">
+
+                    <div class="ai-icon">📈</div>
+
+                    <div>
+                        <h3>Trend Intelligence</h3>
+                        <p>Identify emerging hashtags and viral topics before competitors.</p>
+                    </div>
+
+                </div>
+
+                <div class="ai-item">
+
+                    <div class="ai-icon">🧠</div>
+
+                    <div>
+                        <h3>AI Content Generation</h3>
+                        <p>Create captions, posts, campaigns and hashtags in seconds.</p>
+                    </div>
+
+                </div>
+
+                <div class="ai-item">
+
+                    <div class="ai-icon">🎯</div>
+
+                    <div>
+                        <h3>Audience Insights</h3>
+                        <p>Understand customer sentiment and engagement patterns.</p>
+                    </div>
+
+                </div>
+
+                <div class="ai-item">
+
+                    <div class="ai-icon">🚀</div>
+
+                    <div>
+                        <h3>Growth Recommendations</h3>
+                        <p>Receive intelligent suggestions to improve campaign performance.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="live-panel">
+
+            <div class="live-title">
+
+                <h3>Social Media Pulse</h3>
+
+                <div class="live-dot"></div>
+
+            </div>
+
+            <div class="chart">
+
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+
+            </div>
+
+            <div class="live-metrics">
+
+                <div class="metric-box">
+                    <h3>92%</h3>
+                    <p>Campaign Score</p>
+                </div>
+
+                <div class="metric-box">
+                    <h3>+26%</h3>
+                    <p>Engagement</p>
+                </div>
+
+                <div class="metric-box">
+                    <h3>89%</h3>
+                    <p>Positive Sentiment</p>
+                </div>
+
+                <div class="metric-box">
+                    <h3>7 PM</h3>
+                    <p>Best Posting Time</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="features" id="features">
+
+<div class="container">
+
+<div class="feature-title reveal">
+
+<h2>
+
+Everything you need to grow with
+<span class="gradient">AI</span>
+
+</h2>
+
+<p>
+
+TrendPilot combines intelligent automation, analytics, content creation, and strategic insights into one AI-powered platform.
+
+</p>
+
+</div>
+
+<div class="feature-grid">
+
+<div class="feature-card reveal">
+
+<div class="feature-icon">
+    <i class="fa-solid fa-chart-column"></i>
+</div>
+
+<h3>Trend Analysis</h3>
+
+<p>
+
+Discover trending topics, hashtags, and conversations to stay ahead of competitors.
+
+</p>
+
+</div>
+
+<div class="feature-card reveal">
+
+<div class="feature-icon">
+    <i class="fa-solid fa-pen-nib"></i>
+</div>
+
+<h3>Content Generator</h3>
+
+<p>
+
+Generate captions, posts, marketing campaigns, and engaging social media content instantly.
+
+</p>
+
+</div>
+
+<div class="feature-card reveal">
+
+<div class="feature-icon">
+    <i class="fa-solid fa-comments"></i>
+</div>
+
+<h3>Sentiment Analysis</h3>
+
+<p>
+
+Understand audience emotions and improve customer engagement with AI-powered insights.
+
+</p>
+
+</div>
+
+<div class="feature-card reveal">
+
+<div class="feature-icon">
+    <i class="fa-solid fa-calendar-days"></i>
+</div>
+
+<h3>Smart Scheduling</h3>
+
+<p>
+
+Receive recommendations for the best posting times based on engagement patterns.
+
+</p>
+
+</div>
+
+<div class="feature-card reveal">
+
+<div class="feature-icon">
+    <i class="fa-solid fa-trophy"></i>
+</div>
+
+<h3>Competitor Insights</h3>
+
+<p>
+
+Analyze competitor strategies and identify opportunities to outperform them.
+
+</p>
+
+</div>
+
+<div class="feature-card reveal">
+
+<div class="feature-icon">
+    <i class="fa-solid fa-chart-line"></i>
+</div>
+
+<h3>Performance Dashboard</h3>
+
+<p>
+
+Track campaign performance with visual metrics and actionable recommendations.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<section class="stats">
+
+    <div class="container">
+
+        <div class="stats-grid">
+
+            <div class="stat-card reveal">
+                <h2 class="counter" data-target="250">0</h2>
+                <p>Posts Generated</p>
+            </div>
+
+            <div class="stat-card reveal">
+                <h2 class="counter" data-target="98">0</h2>
+                <p>Sentiment Accuracy</p>
+            </div>
+
+            <div class="stat-card reveal">
+                <h2 class="counter" data-target="50">0</h2>
+                <p>Brands Assisted</p>
+            </div>
+
+            <div class="stat-card reveal">
+                <h2 class="counter" data-target="24">0</h2>
+                <p>AI Availability</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="workflow">
+
+    <div class="workflow-title reveal">
+
+        <h2>How <span class="gradient">TrendPilot AI</span> Works</h2>
+
+        <p>
+            From discovering trends to optimizing campaigns, TrendPilot automates
+            your entire social media workflow using intelligent AI.
+        </p>
+
+    </div>
+
+    <div class="timeline">
+
+        <div class="step reveal">
+
+            <div class="circle"></div>
+
+            <div class="step-content">
+                <h3><i class="fa-solid fa-chart-line"></i> Detect Trends</h3>
+                <p>
+                    Analyze hashtags, keywords, and viral topics across social
+                    media platforms in real time.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="step reveal">
+
+            <div class="circle"></div>
+
+            <div class="step-content">
+                <h3><i class="fa-solid fa-pen-nib"></i> Generate Content</h3>
+                <p>
+                    Create engaging captions, posts, and campaigns tailored to
+                    your audience.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="step reveal">
+
+            <div class="circle"></div>
+
+            <div class="step-content">
+                <h3><i class="fa-solid fa-comments"></i> Analyze Sentiment</h3>
+                <p>
+                    Understand audience reactions and measure engagement using
+                    AI-powered sentiment analysis.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="step reveal">
+
+            <div class="circle"></div>
+
+            <div class="step-content">
+                <h3><i class="fa-solid fa-trophy"></i> Competitor Insights</h3>
+                <p>
+                    Compare your performance with competitors and identify
+                    opportunities for growth.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="step reveal">
+
+            <div class="circle"></div>
+
+            <div class="step-content">
+                <h3><i class="fa-solid fa-rocket"></i> Publish & Grow</h3>
+                <p>
+                    Schedule content at the best time and continuously improve
+                    your strategy using AI recommendations.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="chat-section" id="chat">
+
+    <div class="workflow-title reveal">
+
+        <h2>Experience <span class="gradient">TrendPilot AI</span></h2>
+
+        <p>
+            See how TrendPilot analyzes social media performance and provides
+            intelligent recommendations in seconds.
+        </p>
+
+    </div>
+
+    <div class="chat-wrapper reveal">
+
+        <div class="chat-header">
+
+            <div class="chat-avatar">
+                <i class="fa-solid fa-robot"></i>
+            </div>
+
+            <div>
+
+                <h3>TrendPilot AI</h3>
+
+                <p style="font-size:14px;color:#31D6FF;">
+                    Online • Powered by IBM watsonx Orchestrate
+                </p>
+
+            </div>
+
+        </div>
+
+<div id="root"></div>
+      
+    </div>
+
+</section>
+<footer>
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+            <div>
+
+                <div class="footer-logo">
+                    Trend<span>Pilot</span>
+                </div>
+
+                <p>
+                    TrendPilot is an AI-powered social media assistant built with
+                    IBM watsonx Orchestrate to help businesses discover trends,
+                    create engaging content, analyze audience sentiment, and grow
+                    their online presence through intelligent automation.
+                </p>
+
+                <div class="social-icons">
+
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+
+                    <a href="#"><i class="fab fa-github"></i></a>
+
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+
+                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+
+                </div>
+
+            </div>
+
+            <div>
+
+                <h3>Product</h3>
+
+                <div class="footer-links">
+
+                    <a href="#features">Features</a>
+
+                    <a href="#analytics">Analytics</a>
+
+                    <a href="#chat">AI Assistant</a>
+
+                    <a href="#">Documentation</a>
+
+                </div>
+
+            </div>
+
+            <div>
+
+                <h3>Company</h3>
+
+                <div class="footer-links">
+
+                    <a href="#">About</a>
+
+                    <a href="#">Privacy Policy</a>
+
+                    <a href="#">Terms of Service</a>
+
+                    <a href="#">Contact</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <div>
+                © 2026 TrendPilot. All rights reserved.
+            </div>
+
+            <div>
+                🚀 Built for the IBM watsonx Orchestrate Hackathon
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+<script>
+
+window.addEventListener("scroll", function () {
+
+    const nav = document.getElementById("navbar");
+
+    if (window.scrollY > 40) {
+        nav.classList.add("scrolled");
+    } else {
+        nav.classList.remove("scrolled");
+    }
+
+});
+
+const reveals = document.querySelectorAll(".reveal");
+
+window.addEventListener("scroll", reveal);
+
+reveal();
+
+function reveal() {
+
+    reveals.forEach((element) => {
+
+        const windowHeight = window.innerHeight;
+        const revealTop = element.getBoundingClientRect().top;
+
+        if (revealTop < windowHeight - 100) {
+            element.classList.add("active");
+        }
+
+    });
+
+}
+const counters = document.querySelectorAll(".counter");
+
+let counterStarted = false;
+
+function startCounters() {
+
+    if (counterStarted) return;
+
+    const statsSection = document.querySelector(".stats");
+
+    const sectionTop = statsSection.getBoundingClientRect().top;
+
+    if (sectionTop < window.innerHeight - 100) {
+
+        counterStarted = true;
+
+        counters.forEach(counter => {
+
+            const target = +counter.dataset.target;
+
+            let count = 0;
+
+            const increment = target / 100;
+
+            const updateCounter = () => {
+
+                if (count < target) {
+
+                    count += increment;
+
+                    counter.innerText = Math.ceil(count);
+
+                    requestAnimationFrame(updateCounter);
+
+                } else {
+
+                    if (target === 250)
+                        counter.innerText = "250K+";
+                    else if (target === 98)
+                        counter.innerText = "98%";
+                    else if (target === 50)
+                        counter.innerText = "50+";
+                    else if (target === 24)
+                        counter.innerText = "24/7";
+                }
+
+            };
+
+            updateCounter();
+
+        });
+
+    }
+
+}
+
+window.addEventListener("scroll", startCounters);
+
+startCounters();
+window.addEventListener("scroll", () => {
+
+    const winScroll =
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+
+    const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+
+    const scrolled = (winScroll / height) * 100;
+
+    document.getElementById("progressBar").style.width =
+        scrolled + "%";
+
+});
+const mouseGlow = document.getElementById("mouseGlow");
+
+document.addEventListener("mousemove", (e) => {
+
+    mouseGlow.style.left = e.clientX + "px";
+
+    mouseGlow.style.top = e.clientY + "px";
+
+});
+</script>
+<script>
+  window.wxOConfiguration = {
+    orchestrationID: "b57195a0ec02405292ade438ebd6d073_2a4c1f1b-f775-40b5-801e-f9db2282dc40",
+    hostURL: "https://au-syd.watson-orchestrate.cloud.ibm.com",
+    rootElementID: "root",
+    deploymentPlatform: "ibmcloud",
+    crn: "crn:v1:bluemix:public:watsonx-orchestrate:au-syd:a/b57195a0ec02405292ade438ebd6d073:2a4c1f1b-f775-40b5-801e-f9db2282dc40::",
+    chatOptions: {
+        agentId: "fe8382f4-c64c-42d9-ae86-5f31ce7fccdb", 
+        agentEnvironmentId: "7bc97ea4-6bdc-44de-baf1-27061304db8a",
+    }
+  };
+  setTimeout(function () {
+    const script = document.createElement('script');
+    script.src = `${window.wxOConfiguration.hostURL}/wxochat/wxoLoader.js?embed=true`;
+    script.addEventListener('load', function () {
+        wxoLoader.init();
+    });
+    document.head.appendChild(script);
+  }, 0);                     
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,8 @@
+{
+  "name": "TrendPilot AI",
+  "description": "AI-powered Social Media Assistant using IBM watsonx Orchestrate",
+  "version": "1.0.0",
+  "author": "Ranjan Zambare",
+  "platform": "IBM Cloud",
+  "repository": https://github.com/ranjanzambare9119/TrendPilot-AI
+}
